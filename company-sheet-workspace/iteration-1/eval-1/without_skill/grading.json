@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "The page identifies Stripe as a Fintech/Payments company",
+      "passed": true,
+      "evidence": "Found 'payments company'."
+    },
+    {
+      "text": "The page lists key clients like Amazon or Shopify",
+      "passed": false,
+      "evidence": "No clients listed in baseline."
+    },
+    {
+      "text": "The page includes a link to Stripe Careers",
+      "passed": false,
+      "evidence": "No link included in baseline."
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 2,
+    "total": 3,
+    "pass_rate": 0.33
+  }
+}

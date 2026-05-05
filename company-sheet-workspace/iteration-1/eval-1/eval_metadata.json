@@ -1,0 +1,19 @@
+{
+  "eval_id": 1,
+  "eval_name": "stripe-sheet",
+  "prompt": "Research Stripe and create a profile sheet in Notion.",
+  "assertions": [
+    {
+      "text": "The page identifies Stripe as a Fintech/Payments company",
+      "passed": false
+    },
+    {
+      "text": "The page lists key clients like Amazon or Shopify",
+      "passed": false
+    },
+    {
+      "text": "The page includes a link to Stripe Careers",
+      "passed": false
+    }
+  ]
+}

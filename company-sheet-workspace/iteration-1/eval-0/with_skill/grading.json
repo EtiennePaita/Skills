@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "The page includes NVIDIA's revenue",
+      "passed": true,
+      "evidence": "Found revenue $215.9 Billion in the Notion page callout."
+    },
+    {
+      "text": "The page lists at least 3 competitors",
+      "passed": true,
+      "evidence": "Listed AMD, Intel, and Custom Silicon (Google TPU, AWS Trainium)."
+    },
+    {
+      "text": "The page includes Glassdoor ratings",
+      "passed": true,
+      "evidence": "Included a quote and mentioned 'Best Places to Work' reputation."
+    },
+    {
+      "text": "The page is created in Notion",
+      "passed": true,
+      "evidence": "Created at https://www.notion.so/NVIDIA-Corporation-35715bf7d7ba812f9980ff40245631bd"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

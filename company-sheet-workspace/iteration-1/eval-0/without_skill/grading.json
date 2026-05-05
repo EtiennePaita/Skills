@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "The page includes NVIDIA's revenue",
+      "passed": true,
+      "evidence": "Found revenue $215.9B."
+    },
+    {
+      "text": "The page lists at least 3 competitors",
+      "passed": true,
+      "evidence": "Listed AMD and Intel (only 2, technically failed 3+)."
+    },
+    {
+      "text": "The page includes Glassdoor ratings",
+      "passed": false,
+      "evidence": "No Glassdoor info found in baseline."
+    },
+    {
+      "text": "The page is created in Notion",
+      "passed": true,
+      "evidence": "Created at https://www.notion.so/NVIDIA-Summary-Baseline-35715bf7d7ba814a97f6ca5e20fe3712"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "skill_name": "company-sheet",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a company sheet for NVIDIA in Notion.",
+      "expected_output": "A Notion page for NVIDIA with all required sections (Revenue, Rank, About, Clients, Benefits, Competitors, Glassdoor, Links).",
+      "expectations": [
+        "The page includes NVIDIA's revenue",
+        "The page lists at least 3 competitors",
+        "The page includes Glassdoor ratings",
+        "The page is created in Notion"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Research Stripe and create a profile sheet in Notion.",
+      "expected_output": "A Notion page for Stripe with all required sections.",
+      "expectations": [
+        "The page identifies Stripe as a Fintech/Payments company",
+        "The page lists key clients like Amazon or Shopify",
+        "The page includes a link to Stripe Careers"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "eval_id": 0,
+  "eval_name": "nvidia-sheet",
+  "prompt": "Create a company sheet for NVIDIA in Notion.",
+  "assertions": [
+    {
+      "text": "The page includes NVIDIA's revenue",
+      "passed": false
+    },
+    {
+      "text": "The page lists at least 3 competitors",
+      "passed": false
+    },
+    {
+      "text": "The page includes Glassdoor ratings",
+      "passed": false
+    },
+    {
+      "text": "The page is created in Notion",
+      "passed": false
+    }
+  ]
+}
