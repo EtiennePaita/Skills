@@ -69,14 +69,14 @@ Set the following when creating the page:
 
 - **`parent`**: `{ "page_id": "<target_parent_id>" }`
 - **`properties.title`**: Company name
-- **`icon`**: Use the company logo via Clearbit:
+- **`icon`**: Use the company logo via Hunter.io:
   ```json
   {
     "type": "external",
-    "external": { "url": "https://logo.clearbit.com/<company-domain.com>" }
+    "external": { "url": "https://logos.hunter.io/<company-domain.com>" }
   }
   ```
-  If Clearbit fails (logo not found), fall back to a relevant emoji.
+  If Hunter fails (logo not found), fall back to a relevant emoji.
 
 ### 4b. Populate the page with `patch-block-children`
 
