@@ -13,7 +13,7 @@ This skill researches a company and creates a comprehensive, premium-looking pro
 
 1. **Notion interaction**: Use ONLY `notion-mcp-server` tools to create/update pages. Never use a browser to navigate Notion.
 2. **Research**: Use `search_web` and `read_url_content` ONLY for gathering company data.
-3. **Template**: Always follow the structure defined in `assets/template.md`. Read it before creating the page.
+3. **Template**: Always follow the structure defined in `assets/notion-template.md`. Read it before creating the page.
 4. **Links**: Clickable links in Notion REQUIRE the `link` property inside the `text` object. Plain text URLs are NOT clickable.
 5. **Language**: Create the page in the same language the user asked in.
 
@@ -21,7 +21,7 @@ This skill researches a company and creates a comprehensive, premium-looking pro
 
 ## Step 1 — Read the Template
 
-Before doing anything, read `assets/template.md` to understand the full page structure. This file is the authoritative reference for what sections to include and in what order.
+Before doing anything, read `assets/notion-template.md` to understand the full page structure. This file is the authoritative reference for what sections to include and in what order.
 
 ---
 
@@ -216,4 +216,4 @@ After the page is created, share the Notion page URL with the user and briefly c
 
 ## Assets Reference
 
-- `assets/template.md` — Visual template showing the full page layout. **Read this first.**
+- `assets/notion-template.md` — Visual template showing the full page layout. **Read this first.**
