@@ -19,9 +19,11 @@ This skill researches a company and creates a comprehensive, premium-looking pro
 
 ---
 
-## Step 1 — Read the Template
+## Step 1 — Read the Template Index
 
-Before doing anything, read `assets/notion-template.md` to understand the full page structure. This file is the authoritative reference for what sections to include and in what order.
+Before doing anything, read `assets/notion-template.md`. It lists all template
+files, the full placeholder reference, the page architecture map, and the
+creation checklist. Then open the specific template files as needed.
 
 ---
 
@@ -63,148 +65,51 @@ Search the web for the following. Note everything you find — even partial data
 
 ## Step 4 — Create the Notion Page
 
-### 4a. Create the page with `post-page`
+Follow the template files in order. Each file contains the exact JSON block(s) to send and the placeholders to fill in.
 
-Set the following when creating the page:
+### 4a. Create the page shell
 
-- **`parent`**: `{ "page_id": "<target_parent_id>" }`
-- **`properties.title`**: Company name
-- **`icon`**: Use the company logo via Hunter.io:
-  ```json
-  {
-    "type": "external",
-    "external": { "url": "https://logos.hunter.io/<company-domain.com>" }
-  }
-  ```
-  If Hunter fails (logo not found), fall back to a relevant emoji.
+Read `assets/templates/page-metadata.md` → call `post-page` → **save the returned page ID**.
 
-### 4b. Populate the page with `patch-block-children`
+### 4b. Append the KPI callout and tab skeleton
 
-Build all blocks in a **single call** (or at most 2 calls if content is large). Follow this exact block sequence:
+Read `assets/templates/kpi-callout.md` and `assets/templates/tabs-skeleton.md`.
+Send **both blocks in a single `patch-block-children` call** on the page ID.
 
----
+### 4c. Retrieve tab paragraph IDs
 
-### 📐 Block Structure Reference
+Call `get-block-children` on the **`tab` block ID** returned in step 4b.
+The 5 results (in order) are the paragraph IDs for each tab:
 
-#### SECTION 1 — Dashboard (Column List)
+| Index | Tab label |
+|---|---|
+| `results[0].id` | A propos |
+| `results[1].id` | Produits & Services |
+| `results[2].id` | Clients |
+| `results[3].id` | Concurrents |
+| `results[4].id` | Avis |
 
-Use a `column_list` with **3 columns** side by side. Each column contains a single `callout`:
+### 4d. Populate each tab body
 
-```json
-{
-  "type": "column_list",
-  "column_list": {
-    "children": [
-      {
-        "type": "column",
-        "column": {
-          "children": [{
-            "type": "callout",
-            "callout": {
-              "icon": { "emoji": "💰" },
-              "color": "blue_background",
-              "rich_text": [{ "type": "text", "text": { "content": "Revenue (FY20XX)\n$X Billion" } }]
-            }
-          }]
-        }
-      },
-      {
-        "type": "column",
-        "column": {
-          "children": [{
-            "type": "callout",
-            "callout": {
-              "icon": { "emoji": "🏢" },
-              "color": "green_background",
-              "rich_text": [{ "type": "text", "text": { "content": "Category\nFintech · Payments" } }]
-            }
-          }]
-        }
-      },
-      {
-        "type": "column",
-        "column": {
-          "children": [{
-            "type": "callout",
-            "callout": {
-              "icon": { "emoji": "🏆" },
-              "color": "yellow_background",
-              "rich_text": [{ "type": "text", "text": { "content": "Market Position\n#1 in X" } }]
-            }
-          }]
-        }
-      }
-    ]
-  }
-}
-```
+For each tab, read the corresponding template file and call `patch-block-children`
+with the matching paragraph ID as `block_id`:
 
-#### SECTION 2 — About
+| Template file | Target block ID |
+|---|---|
+| `assets/templates/tab-a-propos.md` | `results[0].id` |
+| `assets/templates/tab-produits-services.md` | `results[1].id` |
+| `assets/templates/tab-clients.md` | `results[2].id` |
+| `assets/templates/tab-concurrents.md` | `results[3].id` |
+| `assets/templates/tab-avis.md` | `results[4].id` |
 
-```
-heading_1: "About"
-callout (gray_background, icon ℹ️): Company résumé (2–3 sentences)
-divider
-heading_2: "Key Metrics"
-bulleted_list_item: "📅 Founded: YEAR"
-bulleted_list_item: "👥 Headcount: X employees"
-bulleted_list_item: "📍 Headquarters: City, Country"
-divider
-heading_2: "Products & Services"
-bulleted_list_item: Product 1
-bulleted_list_item: Product 2
-...
-```
+### ⚠️ Known API Constraints
 
-#### SECTION 3 — Key Clients
-
-```
-heading_2: "Key Clients"
-bulleted_list_item: Client + short description
-... (5–10 items)
-```
-
-#### SECTION 4 — Employee Benefits
-
-```
-heading_2: "Employee Benefits"
-bulleted_list_item: Benefit 1
-bulleted_list_item: Benefit 2
-...
-```
-
-#### SECTION 5 — Competitors
-
-```
-heading_2: "Competitors"
-bulleted_list_item: Competitor + niche note
-...
-```
-
-#### SECTION 6 — Glassdoor
-
-```
-heading_2: "Glassdoor Insights"
-callout (red_background, icon ⭐): "Rating: X.X/5 — based on N reviews"
-quote: "Review text" — Current/Former Employee
-quote: "Review text" — Current/Former Employee
-```
-
-#### SECTION 7 — Links
-
-```
-heading_2: "Links"
-paragraph with CLICKABLE link:
-  {
-    "type": "text",
-    "text": {
-      "content": "Careers Page",
-      "link": { "url": "https://company.com/careers" }
-    }
-  }
-```
-
-> **Why this matters**: Notion only renders hyperlinks when `text.link.url` is set. A plain string like `"[text](url)"` is NOT rendered as a clickable link by the API — it appears as raw text.
+| Constraint | What to do |
+|---|---|
+| `child_database` not allowed as tab child | Use `bulleted_list_item` blocks instead |
+| `column_list` not allowed inside `callout` | Use inline rich_text with emoji separators |
+| `callout.icon` must not be `null` | Always pass an emoji or external icon object |
+| Clickable links | Always set `text.link.url` — plain URL strings are NOT clickable |
 
 ---
 
@@ -216,4 +121,13 @@ After the page is created, share the Notion page URL with the user and briefly c
 
 ## Assets Reference
 
-- `assets/notion-template.md` — Visual template showing the full page layout. **Read this first.**
+- `assets/notion-template.md` — Index of all template files. **Read this first.**
+- `assets/templates/page-metadata.md` — `post-page` payload (icon, cover, title)
+- `assets/templates/kpi-callout.md` — KPI banner callout block
+- `assets/templates/tabs-skeleton.md` — `tab` container + 5 tab header paragraphs
+- `assets/templates/tab-a-propos.md` — "A propos" tab body
+- `assets/templates/tab-produits-services.md` — "Produits & Services" tab body
+- `assets/templates/tab-clients.md` — "Clients" tab body
+- `assets/templates/tab-concurrents.md` — "Concurrents" tab body
+- `assets/templates/tab-avis.md` — "Avis" tab body
+
