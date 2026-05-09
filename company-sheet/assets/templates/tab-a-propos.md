@@ -22,10 +22,19 @@ Call `patch-block-children` with `block_id = <A_PROPOS_PARAGRAPH_ID>`.
 ```json
 [
   {
-    "type": "bookmark",
-    "bookmark": {
-      "url": "{{COMPANY_WEBSITE_URL}}",
-      "caption": []
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "mention",
+          "mention": {
+            "type": "link_preview",
+            "link_preview": {
+              "url": "{{COMPANY_WEBSITE_URL}}"
+            }
+          }
+        }
+      ]
     }
   },
   {

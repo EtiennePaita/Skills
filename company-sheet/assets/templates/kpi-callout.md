@@ -1,12 +1,7 @@
 # Template: KPI Callout Banner
 
 A top-level `callout` block appended directly to the page.
-It holds a single-line rich_text KPI summary (Revenue · Market Position · Headcount).
-
-> **API constraint**: `column_list` cannot be nested inside a `callout` via the
-> REST API. The KPI data is therefore rendered as an inline rich_text string
-> using emoji separators. Use the `equation` block pattern only when appending
-> columns directly to the page (not inside a callout).
+It holds KPI summary using 3 columns (Revenue · Market Position · Headcount).
 
 ## Placeholders
 
@@ -22,20 +17,59 @@ It holds a single-line rich_text KPI summary (Revenue · Market Position · Head
 {
   "type": "callout",
   "callout": {
-    "rich_text": [
-      {
-        "type": "text",
-        "text": {
-          "content": "💵 CA : {{REVENUE}}     🏆 Position : {{MARKET_POSITION}}     👥 Effectif : {{HEADCOUNT}}"
-        },
-        "annotations": {
-          "bold": false, "italic": false, "strikethrough": false,
-          "underline": false, "code": false, "color": "default"
-        }
+    "rich_text": [],
+    "color": "default_background",
+    "icon": {
+      "type": "icon",
+      "icon": {
+        "name": "chart donut",
+        "color": "white"
       }
-    ],
-    "icon": { "type": "emoji", "emoji": "📊" },
-    "color": "default_background"
-  }
+    }
+  },
+  "children": [
+    {
+      "type": "column_list",
+      "column_list": {},
+      "children": [
+        {
+          "type": "column",
+          "column": {},
+          "children": [
+            {
+              "type": "equation",
+              "equation": {
+                "expression": "\\huge\\texttt{\\textsf{💵}} \\\\ \\LARGE\\textbf{\\textsf{{{REVENUE}}}}"
+              }
+            }
+          ]
+        },
+        {
+          "type": "column",
+          "column": {},
+          "children": [
+            {
+              "type": "equation",
+              "equation": {
+                "expression": "\\huge\\texttt{\\textsf{🏆}} \\\\ \\LARGE\\textbf{\\textsf{{{MARKET_POSITION}}}}"
+              }
+            }
+          ]
+        },
+        {
+          "type": "column",
+          "column": {},
+          "children": [
+            {
+              "type": "equation",
+              "equation": {
+                "expression": "\\huge\\texttt{\\textsf{👥}} \\\\ \\LARGE\\textbf{\\textsf{{{HEADCOUNT}}}}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```

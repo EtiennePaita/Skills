@@ -12,6 +12,7 @@ Read this index first, then open the specific template files as needed.
 |---|---|---|
 | [`templates/page-metadata.md`](templates/page-metadata.md) | `post-page` | Page title, icon (Hunter.io logo), cover |
 | [`templates/kpi-callout.md`](templates/kpi-callout.md) | `patch-block-children` on page | KPI banner (Revenue · Position · Headcount) |
+| [`templates/company-categories.md`](templates/company-categories.md) | `patch-block-children` on page | 1-3 Categories with icons in columns |
 | [`templates/tabs-skeleton.md`](templates/tabs-skeleton.md) | `patch-block-children` on page | `tab` block + 5 tab header paragraphs |
 | [`templates/tab-a-propos.md`](templates/tab-a-propos.md) | `patch-block-children` on tab paragraph | Bookmark, résumé, benefits, HQ, careers link |
 | [`templates/tab-produits-services.md`](templates/tab-produits-services.md) | `patch-block-children` on tab paragraph | Bulleted product/service list |
@@ -30,6 +31,9 @@ PAGE: {{COMPANY_NAME}}
 │
 ├── [callout]  ← kpi-callout.md
 │       "💵 CA : {{REVENUE}}  🏆 {{MARKET_POSITION}}  👥 {{HEADCOUNT}}"
+│
+├── [columns]  ← company-categories.md
+│       "{{CATEGORY_1}} | {{CATEGORY_2}} | {{CATEGORY_3}}"
 │
 └── [tab]  ← tabs-skeleton.md
     ├── paragraph "A propos"          ← tab-a-propos.md
@@ -51,6 +55,9 @@ PAGE: {{COMPANY_NAME}}
 | `{{REVENUE}}` | kpi-callout | Last known revenue (e.g. `~400 M€`) |
 | `{{MARKET_POSITION}}` | kpi-callout | Market rank or label (e.g. `Leader`, `#17 France`) |
 | `{{HEADCOUNT}}` | kpi-callout | Employee count (e.g. `+400`, `~300`) |
+| `{{CATEGORY_1..3}}` | company-categories | Company activity categories (max 14 chars) |
+| `{{CATEGORY_1..3_ICON}}` | company-categories | Notion native icon names (e.g., `bank`, `heart`) |
+| `{{CATEGORY_1..3_COLOR}}` | company-categories | Notion native icon colors (e.g., `blue`, `red`) |
 | `{{COMPANY_WEBSITE_URL}}` | tab-a-propos | Official homepage URL |
 | `{{COMPANY_RESUME}}` | tab-a-propos | 2–3 sentence history + mission |
 | `{{BENEFIT_1..4}}` | tab-a-propos | Employee benefit bullet points |
@@ -70,7 +77,7 @@ PAGE: {{COMPANY_NAME}}
 
 - [ ] Research all `{{PLACEHOLDER}}` values (see `SKILL.md` Step 2)
 - [ ] Read `templates/page-metadata.md` → call `post-page` → save returned page ID
-- [ ] Read `templates/kpi-callout.md` + `templates/tabs-skeleton.md` → call `patch-block-children` on the page
+- [ ] Read `templates/kpi-callout.md` + `templates/company-categories.md` + `templates/tabs-skeleton.md` → call `patch-block-children` on the page
 - [ ] Call `get-block-children` on the `tab` block → collect the 5 paragraph IDs
 - [ ] Read `templates/tab-a-propos.md` → call `patch-block-children` on paragraph #1
 - [ ] Read `templates/tab-produits-services.md` → call `patch-block-children` on paragraph #2
